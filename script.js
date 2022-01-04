@@ -147,7 +147,7 @@ function startGame() {
         document.getElementById('timerInput').style.display = 'none';
         document.getElementById("restartButton").style.visibility = 'visible';
         document.getElementById("homepage").style.visibility = 'visible';
-        
+        document.getElementById("instructions").style.display = 'none';
 
         timer -= 20
         document.getElementById('timer').innerHTML = Math.floor((timer % 60000)/1000)

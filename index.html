@@ -9,15 +9,23 @@
 </head>
 <body>
     <div id="title">PENALTY SHOOTOUT</div>
+    
+    <div id="instructions">
+    <h2>HOW TO PLAY</h2>
+    <h3>Choose your position: <br>
+        Goalkeeper use NUMPAD <br>
+        Shooter use QWERTY numbers
+    </h3> <br>
+
+    <h2>Choose how much each round will last:</h2>
+    </div>
     <div id="timerTag">TIMER: <div id="timer"></div><input id="timerInput" type="number" min="0" placeholder="seconds"></div>
     <button id="start-button">StartGame</button> <br>
 
     <button id="restartButton">Restart</button>
     <button id="homepage">Home</button> <br>
 
-    <p align = "center">
-        <canvas id="myCanvas" width="565px" height="340px"></canvas>
-    </p>
+    
     
     <div id="scoreBoard">Score Board 
         <ul id="goalkeeperUl">
@@ -29,6 +37,9 @@
             <li class="shooterScore"></li>
         </ul>
     </div>
+    <p align = "center">
+        <canvas id="myCanvas" width="565px" height="340px"></canvas>
+    </p>
     <script src="./script.js"></script>
 </body>
 
