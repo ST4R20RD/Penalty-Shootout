@@ -1,4 +1,4 @@
-Like in a normal Soccer/Football Shootout, the objective of this game is to Score Goals and the goalkkeper has to try and defend it. 
+Like in a normal Soccer/Football Shootout, the objective of this game is to Score Goals and the goalkeeper has to try and defend it. 
 Player will have to outsmart eachother using numbers on qwerty and numpad. 
 Before starting, players choose the timer.
 After Start Game, they will see each others current position in real time. 
