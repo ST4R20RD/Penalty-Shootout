@@ -11,7 +11,25 @@
     <div id="title">PENALTY SHOOTOUT</div>
     <div id="timerTag">TIMER: <div id="timer"></div><input id="timerInput" type="number" min="0" placeholder="seconds"></div>
     <button id="start-button">StartGame</button> <br>
-    <canvas id="myCanvas" width="565px" height="340px"></canvas>
+
+    <button id="restartButton">Restart</button>
+    <button id="homepage">Home</button> <br>
+
+    <p align = "center">
+        <canvas id="myCanvas" width="565px" height="340px"></canvas>
+    </p>
+    
+    <div id="scoreBoard">Score Board 
+        <ul id="goalkeeperUl">
+            <li class="scoreBoardPlayer">Goalkeeper</li>
+            <li class="goalkeeperScore"></li>
+        </ul>
+        <ul id="shooterUl">
+            <li class="scoreBoardPlayer">Shooter</li>
+            <li class="shooterScore"></li>
+        </ul>
+    </div>
     <script src="./script.js"></script>
 </body>
+
 </html>

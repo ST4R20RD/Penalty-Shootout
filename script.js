@@ -1,6 +1,9 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 
+const goalkeeperLi = document.querySelector(".goalkeeperScore");
+const shooterLi = document.querySelector(".shooterScore");
+
 const balizaImg = new Image();
 balizaImg.src = "./images/baliza.png"
 
@@ -113,6 +116,9 @@ function refreshPage() {
     return location.reload()
 }
 
+let scoreGoalkeeper = 0;
+let scoreShooter = 0;
+
 let intervalId;
 function startGame() { 
     let timerInput = document.getElementById('timerInput').value;
@@ -120,12 +126,17 @@ function startGame() {
     let timer = timerInput * 1000;
     ballDraw.x = -100
     glovesDraw.x = -200
+    document.getElementById("start-button").style.display = 'none'
+    
     intervalId = setInterval(() => {
         ctx.clearRect( 0, 0, canvas.width, canvas.height);
         drawBaliza.draw();
         glovesDraw.draw();
         ballDraw.draw();
         document.getElementById('timerInput').style.display = 'none';
+        document.getElementById("restartButton").style.visibility = 'visible';
+        document.getElementById("homepage").style.visibility = 'visible';
+
 
         timer -= 20
         document.getElementById('timer').innerHTML = Math.floor((timer % 60000)/1000)
@@ -133,13 +144,14 @@ function startGame() {
         if (timer <= 0) {
             if (shooterChoice == "" || goalkeeperChoice == "") {
                 noKeysPressedErrorDraw.draw()
-                setTimeout(refreshPage, 3000)
             } else if (shooterChoice === goalkeeperChoice) {
                 savedTextDraw.draw()
-                setTimeout(refreshPage, 3000)
+                scoreGoalkeeper++
+                goalkeeperLi.innerHTML = scoreGoalkeeper 
                 } else {
                 goalTextDraw.draw()
-                setTimeout(refreshPage, 3000)
+                scoreShooter++
+                shooterLi.innerHTML = scoreShooter
                 }
             clearInterval(intervalId)}
     }, 20);
@@ -156,7 +168,17 @@ window.onload = function() {
        //document.getElementById("start-button").disabled = true;
        startGame()
     };
+    document.getElementById("restartButton").style.visibility = "hidden";
+    document.getElementById("restartButton").onclick = function() { 
+        startGame()
+    };
+    document.getElementById("homepage").style.visibility = "hidden";
+    document.getElementById("homepage").onclick = function() { 
+        refreshPage()
+    };
   };
+
+  
 //document.getElementById("start-button").style.display = 'none'
 
 
