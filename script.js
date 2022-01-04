@@ -24,6 +24,16 @@ savedTextImg.src = "./images/saved.png"
 const noKeysPressedErrorImg = new Image();
 noKeysPressedErrorImg.src = "./images/Error Message.png"
 
+const crowdSound = new Audio();
+crowdSound.src = "./sounds/crowdSound.mp3"
+
+const goalSound = new Audio();
+goalSound.src = "./sounds/goalSound.mp3"
+
+const defendSound = new Audio();
+defendSound.src = "./sounds/defendSound.m4a"
+
+
 const drawBaliza = {
     img: balizaImg,
     x: 0,
@@ -127,7 +137,8 @@ function startGame() {
     ballDraw.x = -100
     glovesDraw.x = -200
     document.getElementById("start-button").style.display = 'none'
-    
+    crowdSound.play();
+
     intervalId = setInterval(() => {
         ctx.clearRect( 0, 0, canvas.width, canvas.height);
         drawBaliza.draw();
@@ -145,10 +156,12 @@ function startGame() {
             if (shooterChoice == "" || goalkeeperChoice == "") {
                 noKeysPressedErrorDraw.draw()
             } else if (shooterChoice === goalkeeperChoice) {
+                defendSound.play();
                 savedTextDraw.draw()
                 scoreGoalkeeper++
                 goalkeeperLi.innerHTML = scoreGoalkeeper 
                 } else {
+                goalSound.play();
                 goalTextDraw.draw()
                 scoreShooter++
                 shooterLi.innerHTML = scoreShooter
@@ -168,7 +181,8 @@ window.onload = function() {
        startGame()
     };
     document.getElementById("restartButton").style.visibility = "hidden";
-    document.getElementById("restartButton").onclick = function() { 
+    document.getElementById("restartButton").onclick = function() {
+        goalSound.pause();
         shooterChoice = "";
         goalkeeperChoice = ""; 
         startGame()
