@@ -136,7 +136,7 @@ function startGame() {
         document.getElementById('timerInput').style.display = 'none';
         document.getElementById("restartButton").style.visibility = 'visible';
         document.getElementById("homepage").style.visibility = 'visible';
-
+        
 
         timer -= 20
         document.getElementById('timer').innerHTML = Math.floor((timer % 60000)/1000)
@@ -159,8 +159,7 @@ function startGame() {
 
 const goalPlace = ['topLeft', 'topRight', 'Center', 'botLeft', 'botRight']
 let shooterChoice = "";
-let goalkeeperChoice = "";
-  
+let goalkeeperChoice = ""; 
 
 
 window.onload = function() {
@@ -170,7 +169,10 @@ window.onload = function() {
     };
     document.getElementById("restartButton").style.visibility = "hidden";
     document.getElementById("restartButton").onclick = function() { 
+        shooterChoice = "";
+        goalkeeperChoice = ""; 
         startGame()
+        
     };
     document.getElementById("homepage").style.visibility = "hidden";
     document.getElementById("homepage").onclick = function() { 
