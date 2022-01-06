@@ -16,11 +16,15 @@
         Goalkeeper use NUMPAD <br>
         Shooter use QWERTY numbers
     </h3> <br>
+    
+    <h2>Choose how many points to win:</h2>
+    <div id="roundTag">Best to: <div id="roundCounter"></div><input id="roundInput" type="number" min="0" placeholder="1"></input></div>
 
     <h2>Choose how much each round will last:</h2>
     </div>
     <div id="timerTag">TIMER: <div id="timer"></div><input id="timerInput" type="number" min="0" placeholder="0">seconds</div>
     <button id="start-button">StartGame</button> <br>
+    <div class="result"></div>
 
     <button id="restartButton">Restart</button>
     <button id="homepage">Home</button> <br>
@@ -30,11 +34,11 @@
     <div id="scoreBoard">Score Board 
         <ul id="goalkeeperUl">
             <li class="scoreBoardPlayer">Goalkeeper</li>
-            <li class="goalkeeperScore"></li>
+            <li class="goalkeeperScore">0</li>
         </ul>
         <ul id="shooterUl">
             <li class="scoreBoardPlayer">Shooter</li>
-            <li class="shooterScore"></li>
+            <li class="shooterScore">0</li>
         </ul>
     </div>
     <p align = "center">

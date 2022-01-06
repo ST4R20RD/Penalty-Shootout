@@ -30,6 +30,7 @@ crowdSound.src = "./sounds/crowdSound.mp3"
 const goalSound = new Audio();
 goalSound.src = "./sounds/goalSound.mp3"
 
+
 const defendSound = new Audio();
 defendSound.src = "./sounds/defendSound.m4a"
 
@@ -129,46 +130,71 @@ function refreshPage() {
 let scoreGoalkeeper = 0;
 let scoreShooter = 0;
 
+let roundCounter = 0;
+
 let intervalId;
 function startGame() { 
     let timerInput = document.getElementById('timerInput').value;
+    let roundInput = document.getElementById('roundInput').value;
+    
     clearInterval(intervalId)
     let timer = timerInput * 1000;
     ballDraw.x = -100
     glovesDraw.x = -200
     document.getElementById("start-button").style.display = 'none'
     crowdSound.play();
+    goalSound.volume = 0.2;
+    
 
-    intervalId = setInterval(() => {
-        ctx.clearRect( 0, 0, canvas.width, canvas.height);
-        drawBaliza.draw();
-        glovesDraw.draw();
-        ballDraw.draw();
-        document.getElementById('timerInput').style.display = 'none';
-        document.getElementById("restartButton").style.visibility = 'visible';
-        document.getElementById("homepage").style.visibility = 'visible';
-        document.getElementById("instructions").style.display = 'none';
-
-        timer -= 20
-        document.getElementById('timer').innerHTML = Math.floor((timer % 60000)/1000)
-        
-        if (timer <= 0) {
-            if (shooterChoice == "" || goalkeeperChoice == "") {
-                noKeysPressedErrorDraw.draw()
-            } else if (shooterChoice === goalkeeperChoice) {
-                defendSound.play();
-                savedTextDraw.draw()
-                scoreGoalkeeper++
-                goalkeeperLi.innerHTML = scoreGoalkeeper 
+    if (scoreGoalkeeper < roundInput && scoreShooter < roundInput) {
+            intervalId = setInterval(() => {
+            ctx.clearRect( 0, 0, canvas.width, canvas.height);
+            drawBaliza.draw();
+            glovesDraw.draw();
+            ballDraw.draw();
+            document.getElementById('timerInput').style.display = 'none';
+            document.getElementById("restartButton").style.visibility = 'visible';
+            document.getElementById("homepage").style.visibility = 'visible';
+            document.getElementById("instructions").style.display = 'none';
+            document.getElementById("timer").style.display = 'block';   
+                     
+            timer -= 20
+            document.getElementById('timer').innerHTML = Math.floor((timer % 60000)/1000)
+            
+            if (timer <= 0) {
+                if (shooterChoice == "" || goalkeeperChoice == "") {
+                    noKeysPressedErrorDraw.draw()
+                } else if (shooterChoice === goalkeeperChoice) {
+                    defendSound.play();
+                    savedTextDraw.draw()
+                    scoreGoalkeeper++
+                    goalkeeperLi.innerHTML = scoreGoalkeeper 
                 } else {
-                goalSound.play();
-                goalTextDraw.draw()
-                scoreShooter++
-                shooterLi.innerHTML = scoreShooter
+                    goalSound.play();
+                    goalTextDraw.draw()
+                    scoreShooter++
+                    shooterLi.innerHTML = scoreShooter
                 }
-            clearInterval(intervalId)}
-    }, 20);
+                
+                roundCounter++ 
+                clearInterval(intervalId)
+            }
+        }, 20);
+        
+    } else { finishGame() }
 }
+
+function finishGame() {
+    document.getElementById('myCanvas').style.display = 'none';
+    document.getElementById("restartButton").style.visibility = "hidden";
+  if (scoreGoalkeeper = roundInput) {
+        document.querySelector('.result').innerHTML = 'GOALKEEPER WON!'
+    } else if (scoreShooter = roundInput) {
+        document.querySelector('.result').innerHTML = 'SHOOTER WON!'
+    }
+    clearInterval(intervalId)
+}
+
 
 const goalPlace = ['topLeft', 'topRight', 'Center', 'botLeft', 'botRight']
 let shooterChoice = "";
@@ -176,6 +202,7 @@ let goalkeeperChoice = "";
 
 
 window.onload = function() {
+    document.getElementById("timer").style.display = 'none';
     document.getElementById("start-button").onclick = function() {
        //document.getElementById("start-button").disabled = true;
        startGame()
@@ -184,7 +211,7 @@ window.onload = function() {
     document.getElementById("restartButton").onclick = function() {
         goalSound.pause();
         shooterChoice = "";
-        goalkeeperChoice = ""; 
+        goalkeeperChoice = "";        
         startGame()
         
     };
